@@ -425,6 +425,28 @@ const pauseFromSystem = (): void => {
   game.pause();
 };
 
+const handleBoardStagePress = (target: EventTarget | null): void => {
+  if (target instanceof Node && maximizeButton.contains(target)) {
+    return;
+  }
+
+  const state = game.getState();
+
+  if (state === 'gameover') {
+    game.restart();
+    return;
+  }
+
+  if (state === 'running' || state === 'clearing') {
+    game.pause();
+    return;
+  }
+
+  if (state === 'paused' || state === 'idle') {
+    game.start();
+  }
+};
+
 let fallbackMaximized = false;
 
 const updateMaximizeButton = (): void => {
@@ -486,26 +508,8 @@ document.addEventListener('visibilitychange', () => {
   }
 });
 
-boardStage.addEventListener('dblclick', () => {
-  pauseFromSystem();
-});
-
-let lastTouchTap = 0;
-
-boardStage.addEventListener('pointerup', (event) => {
-  if (event.pointerType !== 'touch') {
-    return;
-  }
-
-  const now = performance.now();
-
-  if (now - lastTouchTap < 280) {
-    pauseFromSystem();
-    lastTouchTap = 0;
-    return;
-  }
-
-  lastTouchTap = now;
+boardStage.addEventListener('click', (event) => {
+  handleBoardStagePress(event.target);
 });
 
 renderer.ready.finally(() => {
