@@ -47,10 +47,6 @@ app.innerHTML = `
                 <strong id="score">0</strong>
               </article>
               <article class="stat-card">
-                <span>等级</span>
-                <strong id="level">1</strong>
-              </article>
-              <article class="stat-card">
                 <span>消除行数</span>
                 <strong id="lines">0</strong>
               </article>
@@ -172,7 +168,6 @@ const overlayTitle = document.querySelector<HTMLHeadingElement>('#overlay-title'
 const overlayCopy = document.querySelector<HTMLParagraphElement>('#overlay-copy');
 const pauseButton = document.querySelector<HTMLButtonElement>('#pause-button');
 const scoreNode = document.querySelector<HTMLElement>('#score');
-const levelNode = document.querySelector<HTMLElement>('#level');
 const linesNode = document.querySelector<HTMLElement>('#lines');
 const boardStage = document.querySelector<HTMLDivElement>('#board-stage');
 const playfieldShell = document.querySelector<HTMLElement>('#playfield-shell');
@@ -195,7 +190,6 @@ if (
   !overlayCopy ||
   !pauseButton ||
   !scoreNode ||
-  !levelNode ||
   !linesNode ||
   !boardStage ||
   !playfieldShell ||
@@ -256,7 +250,6 @@ const updateOverlay = (state: GameState, snapshot: GameSnapshot): void => {
 
 const updateStats = (stats: GameStats): void => {
   scoreNode.textContent = String(stats.score);
-  levelNode.textContent = String(stats.level);
   linesNode.textContent = String(stats.lines);
 };
 

@@ -159,7 +159,7 @@ input {
 
 .stats-row {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
 }
 
@@ -615,6 +615,7 @@ input {
     position: sticky;
     bottom: calc(env(safe-area-inset-bottom, 0px) + 10px);
     z-index: 6;
+    width: min(100%, 304px);
     margin-top: -24px;
     padding-top: 4px;
     gap: 6px;
@@ -690,7 +691,7 @@ input {
     max-width: 100%;
     margin: 0 auto;
     transform: none;
-    grid-template-columns: minmax(0, 1fr) 108px;
+    grid-template-columns: minmax(0, 1fr) minmax(158px, 0.72fr);
     gap: 8px;
     pointer-events: auto;
     background: rgba(8, 17, 29, 0.68);
@@ -713,16 +714,21 @@ input {
 
   .playfield-shell.is-maximized .next-piece-card,
   .playfield-shell:fullscreen .next-piece-card {
-    width: 108px;
-    min-width: 108px;
+    width: 100%;
+    min-width: 0;
+    display: grid;
+    grid-template-columns: auto minmax(72px, 1fr);
     padding: 6px;
-    align-content: center;
+    align-items: center;
     justify-items: center;
   }
 
   .playfield-shell.is-maximized .next-piece-copy span,
   .playfield-shell:fullscreen .next-piece-copy span {
-    font-size: 10px;
+    display: block;
+    width: min-content;
+    font-size: 11px;
+    line-height: 1.15;
   }
 
   .playfield-shell.is-maximized .preview-canvas,
@@ -747,9 +753,18 @@ input {
   .playfield-shell:fullscreen .controller-panel {
     position: relative;
     bottom: auto;
-    margin-top: 0;
+    width: min(100%, calc((100svh - env(safe-area-inset-bottom, 0px) - 196px) / 2));
+    justify-self: center;
+    margin-top: -2px;
+    margin-bottom: 10px;
     padding-top: 0;
     align-self: end;
+    gap: 8px;
+  }
+
+  .playfield-shell.is-maximized .control-button,
+  .playfield-shell:fullscreen .control-button {
+    min-height: 58px;
   }
 
   .playfield-shell.is-maximized .playfield-expand-button,
