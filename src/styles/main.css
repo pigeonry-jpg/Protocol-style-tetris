@@ -143,6 +143,7 @@ input {
   margin: 0 auto;
   display: grid;
   gap: 12px;
+  position: relative;
 }
 
 .board-topbar {
@@ -308,6 +309,26 @@ input {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 10px;
+}
+
+.control-button[data-action="moveLeft"] {
+  order: 1;
+}
+
+.control-button[data-action="rotateCW"] {
+  order: 2;
+}
+
+.control-button[data-action="hardDrop"] {
+  order: 3;
+}
+
+.control-button[data-action="softDropStart"] {
+  order: 4;
+}
+
+.control-button[data-action="moveRight"] {
+  order: 5;
 }
 
 .control-button {
@@ -514,7 +535,7 @@ input {
 
 @media (max-width: 640px) {
   .playfield-stack {
-    gap: 8px;
+    gap: 6px;
   }
 
   .hero-copy h1 {
@@ -529,10 +550,21 @@ input {
   }
 
   .board-topbar {
-    grid-template-columns: minmax(0, 1fr) auto;
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    z-index: 4;
+    width: min(calc(100% - 28px), 300px);
+    transform: translateX(-50%);
+    grid-template-columns: 1fr;
     align-items: start;
-    gap: 8px;
+    gap: 6px;
     padding: 8px;
+    background: rgba(8, 17, 29, 0.54);
+    border-color: rgba(126, 186, 245, 0.16);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+    pointer-events: none;
   }
 
   .stats-row {
@@ -553,50 +585,33 @@ input {
   }
 
   .next-piece-card {
-    width: 112px;
-    min-width: 112px;
-    padding: 8px;
+    width: 100%;
+    min-width: 0;
+    padding: 6px 8px;
     gap: 4px;
+    background: rgba(10, 20, 35, 0.48);
   }
 
   .next-piece-copy span {
-    font-size: 12px;
+    font-size: 11px;
   }
 
   .preview-canvas {
-    width: 96px;
-    height: 72px;
+    width: 88px;
+    height: 60px;
     max-width: none;
+    margin: 0 auto;
+    background: rgba(5, 12, 22, 0.55);
   }
 
   .controller-panel {
-    margin-top: -4px;
-    gap: 8px;
-  }
-
-  .control-button[data-action="moveLeft"] {
-    order: 1;
-  }
-
-  .control-button[data-action="rotateCW"] {
-    order: 2;
-  }
-
-  .control-button[data-action="hardDrop"] {
-    order: 3;
-  }
-
-  .control-button[data-action="softDropStart"] {
-    order: 4;
-  }
-
-  .control-button[data-action="moveRight"] {
-    order: 5;
+    margin-top: -12px;
+    gap: 6px;
   }
 
   .control-button {
-    min-height: 56px;
-    font-size: 22px;
+    min-height: 52px;
+    font-size: 20px;
   }
 
   .notes-scroll {
@@ -619,12 +634,12 @@ input {
   .board-wrap,
   .playfield-shell.is-maximized .board-wrap,
   .playfield-shell:fullscreen .board-wrap {
-    width: min(100%, 348px);
+    width: min(100%, 304px);
   }
 
   .playfield-expand-button {
     right: -16px;
-    bottom: 64px;
+    bottom: 72px;
     width: 46px;
     height: 46px;
   }
