@@ -1,6 +1,9 @@
 import { defineConfig } from 'vite';
 
-export default defineConfig({
+const githubPagesBase = '/Protocol-style-tetris/';
+
+export default defineConfig(({ mode }) => ({
+  base: mode === 'github-pages' ? githubPagesBase : '/',
   server: {
     host: '127.0.0.1',
     port: 5173,
@@ -14,4 +17,4 @@ export default defineConfig({
     globals: true,
     include: ['src/**/*.test.ts'],
   },
-});
+}));

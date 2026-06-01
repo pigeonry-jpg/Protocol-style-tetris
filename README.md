@@ -15,6 +15,12 @@ npm run dev
 npm run build
 ```
 
+如果你要本地模拟 GitHub Pages 的路径构建，可以这样：
+
+```bash
+node_modules/.bin/vite build --mode github-pages
+```
+
 ## 运行测试
 
 ```bash
@@ -34,6 +40,62 @@ npm run electron:dev
 ```bash
 npm run electron:build
 ```
+
+## 公网部署
+
+这个项目是标准的 Vite 静态站点，`npm run build` 产出的 `dist/` 可以直接部署到静态托管平台。
+
+### 方案一：GitHub Pages
+
+仓库里已经带好了 GitHub Pages 的自动部署工作流：
+
+- 工作流文件：[.github/workflows/deploy-pages.yml](/D:/Project/tetris/.github/workflows/deploy-pages.yml)
+- Vite 的 GitHub Pages 路径配置在 [vite.config.ts](/D:/Project/tetris/vite.config.ts)
+
+首次启用时，你只需要在 GitHub 仓库里做一次设置：
+
+1. 打开仓库 `Settings`
+2. 进入 `Pages`
+3. 在 `Build and deployment` 里把 `Source` 设为 `GitHub Actions`
+4. 确认默认分支是 `main`
+5. 之后每次推送到 `main`，GitHub Actions 都会自动构建并发布
+
+这个仓库发布后的 GitHub Pages 地址通常会是：
+
+```text
+https://pigeonry-jpg.github.io/Protocol-style-tetris/
+```
+
+说明：
+
+- 按 Vite 官方文档，部署到 `https://<USER>.github.io/<REPO>/` 时，需要把 `base` 设成 `/<REPO>/`
+- 这里我用了 `github-pages` 构建模式来只在 GitHub Pages 构建时启用仓库路径，避免影响本地开发和 Vercel
+
+参考：
+
+- [Vite: Deploying a Static Site](https://vite.dev/guide/static-deploy.html)
+- [GitHub Docs: Using custom workflows with GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)
+
+### 方案二：Vercel
+
+Vercel 对这个项目会更省心，通常不需要额外配置文件。
+
+操作步骤：
+
+1. 登录 [Vercel](https://vercel.com/)
+2. 选择 `Add New Project`
+3. 导入这个 GitHub 仓库 `pigeonry-jpg/Protocol-style-tetris`
+4. 保持默认 Framework Preset 或选择 `Vite`
+5. 构建命令填 `npm run build`
+6. 输出目录填 `dist`
+7. 点击 `Deploy`
+
+Vercel 部署时本项目会使用根路径 `/`，所以不需要 GitHub Pages 那种仓库子路径。
+
+参考：
+
+- [Vercel Documentation](https://vercel.com/docs/)
+- [Vercel deploy](https://vercel.com/docs/cli/deploy)
 
 ## 素材替换说明
 
