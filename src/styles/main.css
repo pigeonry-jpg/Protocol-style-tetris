@@ -536,6 +536,7 @@ input {
 @media (max-width: 640px) {
   .playfield-stack {
     gap: 6px;
+    justify-items: center;
   }
 
   .hero-copy h1 {
@@ -550,12 +551,10 @@ input {
   }
 
   .board-topbar {
-    position: absolute;
-    top: 8px;
-    left: 50%;
+    position: relative;
     z-index: 4;
     width: min(calc(100% - 28px), 300px);
-    transform: translateX(-50%);
+    margin: 0 auto -54px;
     grid-template-columns: 1fr;
     align-items: start;
     gap: 6px;
@@ -565,6 +564,12 @@ input {
     backdrop-filter: blur(12px);
     box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
     pointer-events: none;
+  }
+
+  .board-stage {
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
 
   .stats-row {
