@@ -636,10 +636,13 @@ input {
   .playfield-shell.is-maximized {
     inset: 0;
     border-radius: 0;
+    padding: 8px 8px calc(env(safe-area-inset-bottom, 0px) + 8px);
+    overflow: hidden;
   }
 
   .playfield-shell:fullscreen {
     padding: 10px;
+    overflow: hidden;
   }
 
   .board-wrap,
@@ -668,5 +671,91 @@ input {
   .overlay-card p {
     font-size: 14px;
     line-height: 1.5;
+  }
+
+  .playfield-shell.is-maximized .playfield-stack,
+  .playfield-shell:fullscreen .playfield-stack {
+    width: 100%;
+    height: calc(100svh - env(safe-area-inset-bottom, 0px) - 16px);
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    align-content: stretch;
+    gap: 8px;
+  }
+
+  .playfield-shell.is-maximized .board-topbar,
+  .playfield-shell:fullscreen .board-topbar {
+    position: relative;
+    top: auto;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    transform: none;
+    grid-template-columns: minmax(0, 1fr) 108px;
+    gap: 8px;
+    pointer-events: auto;
+    background: rgba(8, 17, 29, 0.68);
+  }
+
+  .playfield-shell.is-maximized .stats-row,
+  .playfield-shell:fullscreen .stats-row {
+    gap: 6px;
+  }
+
+  .playfield-shell.is-maximized .stat-card,
+  .playfield-shell:fullscreen .stat-card {
+    padding: 6px 8px;
+  }
+
+  .playfield-shell.is-maximized .stat-card strong,
+  .playfield-shell:fullscreen .stat-card strong {
+    font-size: 16px;
+  }
+
+  .playfield-shell.is-maximized .next-piece-card,
+  .playfield-shell:fullscreen .next-piece-card {
+    width: 108px;
+    min-width: 108px;
+    padding: 6px;
+    align-content: center;
+    justify-items: center;
+  }
+
+  .playfield-shell.is-maximized .next-piece-copy span,
+  .playfield-shell:fullscreen .next-piece-copy span {
+    font-size: 10px;
+  }
+
+  .playfield-shell.is-maximized .preview-canvas,
+  .playfield-shell:fullscreen .preview-canvas {
+    width: 84px;
+    height: 56px;
+  }
+
+  .playfield-shell.is-maximized .board-stage,
+  .playfield-shell:fullscreen .board-stage {
+    min-height: 0;
+    padding-top: 0;
+    align-items: center;
+  }
+
+  .playfield-shell.is-maximized .board-wrap,
+  .playfield-shell:fullscreen .board-wrap {
+    width: min(100%, calc((100svh - env(safe-area-inset-bottom, 0px) - 196px) / 2));
+  }
+
+  .playfield-shell.is-maximized .controller-panel,
+  .playfield-shell:fullscreen .controller-panel {
+    position: relative;
+    bottom: auto;
+    margin-top: 0;
+    padding-top: 0;
+    align-self: end;
+  }
+
+  .playfield-shell.is-maximized .playfield-expand-button,
+  .playfield-shell:fullscreen .playfield-expand-button {
+    top: 8px;
+    right: 8px;
+    bottom: auto;
   }
 }
